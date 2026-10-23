@@ -1,5 +1,5 @@
-const CACHE='ceb-pwa-v10';
-const SHELL=['./','./index.html','./estudos-prontos.html','./pregacoes-prontas.html','./biblia.js','./tabs-fix.js','./instalador.html','./manifest.webmanifest','./icon-192.svg','./icon-512.svg','./aula-ebd-jose-genesis-50.html','./slides-jose-perdao.html'];
+const CACHE='ceb-pwa-v11';
+const SHELL=['./','./index.html','./estudos-prontos.html','./pregacoes-prontas.html','./biblia.js?v=7','./tabs-fix.js','./instalador.html','./manifest.webmanifest','./icon-192.svg','./icon-512.svg','./aula-ebd-jose-genesis-50.html','./slides-jose-perdao.html'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',event=>{

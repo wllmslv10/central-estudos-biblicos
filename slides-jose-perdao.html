@@ -343,5 +343,6 @@ document.getElementById('print').addEventListener('click',()=>window.print());
 document.addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(current+1)}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(current-1)}else if(e.key==='Home'){show(0)}else if(e.key==='End'){show(slides.length-1)}else if(e.key.toLowerCase()==='f'){if(!document.fullscreenElement)document.getElementById('stage').requestFullscreen?.();else document.exitFullscreen?.()}});
 show(0);
 </script>
+<script src="./biblia.js?v=7"></script>
 </body>
 </html>
