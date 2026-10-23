@@ -262,13 +262,40 @@
     // Keep the reader isolated: a recognition error must not interrupt the page.
     try { makeClickable(document.body); }
     catch (error) { console.error('CEB Bíblia: falha ao reconhecer referências iniciais.', error); }
+    // Agrupa mutações da mesma atualização da página. Catálogos grandes podem
+    // inserir dezenas de cartões de uma vez; processá-los individualmente causa
+    // trabalho repetido e pode congelar o navegador em celulares/computadores lentos.
+    let pendingRoots = new Set();
+    let scanScheduled = false;
     const observer = new MutationObserver(records => {
-      for (const record of records) for (const node of record.addedNodes) {
-        // Text nodes are created by makeClickable itself. Rewalking their parent
-        // would rescan the whole card (and can retrigger more mutations).
-        if (node.nodeType !== Node.ELEMENT_NODE || node.matches('.bib-modal,.bib-preview,.bib-ref')) continue;
-        try { makeClickable(node); }
-        catch (error) { console.error('CEB Bíblia: falha ao reconhecer referências inseridas.', error); }
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (node.nodeType !== Node.ELEMENT_NODE) continue;
+          if (node.matches('.bib-modal,.bib-preview,.bib-ref') || node.closest('.bib-modal,.bib-preview,.bib-ref')) continue;
+          let ancestor = node.parentElement;
+          let queued = false;
+          while (ancestor && ancestor !== document.body) {
+            if (pendingRoots.has(ancestor)) { queued = true; break; }
+            ancestor = ancestor.parentElement;
+          }
+          if (!queued) {
+            for (const root of [...pendingRoots]) if (root !== node && node.contains(root)) pendingRoots.delete(root);
+            pendingRoots.add(node);
+          }
+        }
+      }
+      if (pendingRoots.size && !scanScheduled) {
+        scanScheduled = true;
+        requestAnimationFrame(() => {
+          scanScheduled = false;
+          const roots = [...pendingRoots];
+          pendingRoots.clear();
+          for (const root of roots) {
+            if (!root.isConnected || root.closest('.bib-modal,.bib-preview,.bib-ref')) continue;
+            try { makeClickable(root); }
+            catch (error) { console.error('CEB Bíblia: falha ao reconhecer referências inseridas.', error); }
+          }
+        });
       }
     });
     observer.observe(document.body, { childList: true, subtree: true });
