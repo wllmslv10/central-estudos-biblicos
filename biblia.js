@@ -259,11 +259,16 @@
   });
 
   function init() {
-    makeClickable(document.body);
+    // Keep the reader isolated: a recognition error must not interrupt the page.
+    try { makeClickable(document.body); }
+    catch (error) { console.error('CEB Bíblia: falha ao reconhecer referências iniciais.', error); }
     const observer = new MutationObserver(records => {
       for (const record of records) for (const node of record.addedNodes) {
-        if (node.nodeType === Node.ELEMENT_NODE && !node.matches('.bib-modal,.bib-preview,.bib-ref')) makeClickable(node);
-        else if (node.nodeType === Node.TEXT_NODE) makeClickable(node.parentElement);
+        // Text nodes are created by makeClickable itself. Rewalking their parent
+        // would rescan the whole card (and can retrigger more mutations).
+        if (node.nodeType !== Node.ELEMENT_NODE || node.matches('.bib-modal,.bib-preview,.bib-ref')) continue;
+        try { makeClickable(node); }
+        catch (error) { console.error('CEB Bíblia: falha ao reconhecer referências inseridas.', error); }
       }
     });
     observer.observe(document.body, { childList: true, subtree: true });
