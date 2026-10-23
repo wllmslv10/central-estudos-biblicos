@@ -52,4 +52,4 @@ window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();ins
 installButton.addEventListener('click',async()=>{if(!installPrompt){alert('Para instalar, abra o menu do navegador e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”.');return}installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.hidden=true});
 window.addEventListener('appinstalled',()=>{installPrompt=null;installButton.hidden=true});
 if('serviceWorker' in navigator && location.protocol.startsWith('http'))window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(err=>console.warn('Não foi possível ativar o modo offline:',err)));
-</script></body></html>
+</script><script src="./biblia.js?v=5"></script><script src="./tabs-fix.js?v=3"></script></body></html>
