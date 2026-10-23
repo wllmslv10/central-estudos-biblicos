@@ -1,4 +1,4 @@
-const CACHE='ceb-pwa-v2';
+const CACHE='ceb-pwa-v3';
 const SHELL=['./','./index.html','./manifest.webmanifest','./icon-192.svg','./icon-512.svg','./aula-ebd-jose-genesis-50.html','./slides-jose-perdao.html'];
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
