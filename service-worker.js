@@ -7,9 +7,9 @@ self.addEventListener('fetch',event=>{
  if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
  const url=new URL(req.url);
  const isPage=req.mode==='navigate'||/\\.html?$/i.test(url.pathname)||url.pathname.endsWith('/');
+ // As páginas com conteúdo e scripts devem sempre vir da versão publicada; não servir HTML antigo do cache.
  if(isPage){
   event.respondWith(fetch(req,{cache:'no-store'}).then(response=>{
-   if(response&&response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(req,copy))}
    return response;
   }).catch(()=>caches.match(req).then(cached=>cached||caches.match('./index.html'))));
   return;
