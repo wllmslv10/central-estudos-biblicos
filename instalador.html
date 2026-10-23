@@ -4,38 +4,84 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#101d35">
+<meta name="description" content="Instale a Central de Estudos Bíblicos no celular, tablet ou computador.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Estudos Bíblicos">
 <title>Instalar — Central de Estudos Bíblicos</title>
 <style>
-:root{--navy:#101d35;--gold:#d9b66d;--bg:#f5f3ee;--ink:#202a39;--muted:#687386}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,Arial,sans-serif}header{background:var(--navy);color:#fff;padding:28px 20px;border-bottom:5px solid var(--gold)}header div,main{max-width:850px;margin:auto}h1{margin:0;font-size:clamp(1.6rem,5vw,2.3rem)}header p{margin:8px 0 0;color:#dbe3ef}main{padding:22px 16px}.card{background:#fff;border:1px solid #dfe3e9;border-radius:14px;padding:20px;margin:0 0 16px}.card h2{margin:0 0 8px;color:var(--navy);font-size:1.2rem}.btn{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;text-decoration:none;padding:12px 16px;border-radius:10px;margin:6px 8px 0 0}.secondary{background:var(--navy);color:white}.note{color:var(--muted);font-size:.95rem}ol{padding-left:24px}li{margin:8px 0}.footer{text-align:center;color:var(--muted);padding:8px 16px 28px}
+:root{--navy:#101d35;--navy2:#1b2d4c;--gold:#d9b66d;--bg:#f5f3ee;--ink:#202a39;--muted:#687386;--line:#dfe3e9}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,Arial,sans-serif}header{background:linear-gradient(130deg,var(--navy),var(--navy2));color:white;padding:30px 20px;border-bottom:5px solid var(--gold)}header>div,main{max-width:850px;margin:auto}h1{margin:0;font-size:clamp(1.6rem,5vw,2.3rem);line-height:1.2}header p{margin:8px 0 0;color:#dbe3ef}main{padding:22px 16px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;margin:0 0 16px;box-shadow:0 5px 18px #17233a0a}.card h2{margin:0 0 8px;color:var(--navy);font-size:1.2rem}.btn{display:inline-block;border:0;background:var(--gold);color:var(--navy);font:inherit;font-weight:800;text-decoration:none;padding:12px 16px;border-radius:10px;margin:6px 8px 0 0;cursor:pointer}.secondary{background:var(--navy);color:white}.status{background:#f0f4fa;border-radius:10px;padding:12px 14px;margin-top:14px}.note{color:var(--muted);font-size:.95rem}ol{padding-left:24px}li{margin:8px 0}.footer{text-align:center;color:var(--muted);padding:8px 16px 28px}.hidden{display:none!important}
 </style>
 </head>
 <body>
-<header><div><h1>📖 Central de Estudos Bíblicos</h1><p>Instalação no celular, tablet e computador</p></div></header>
+<header><div><h1>📖 Central de Estudos Bíblicos</h1><p>Instalador para celular, tablet e computador</p></div></header>
 <main>
 <section class="card">
-<h2>Comece por aqui</h2>
-<p>Use o botão abaixo para abrir a central. A instalação é feita pelo navegador compatível; não é necessário instalar um arquivo APK no Android nem um programa separado no computador.</p>
-<a class="btn" href="./">Abrir Central de Estudos Bíblicos</a>
+<h2>📲 Instalar aplicativo</h2>
+<p>Use este botão para instalar a Central como aplicativo quando seu navegador oferecer suporte. A instalação mantém o endereço oficial e abre a Central em uma janela própria.</p>
+<button id="install" class="btn" type="button">📲 Instalar Central de Estudos Bíblicos</button>
+<a class="btn secondary" href="./">Abrir a Central</a>
+<div id="status" class="status" role="status" aria-live="polite">Verificando as opções de instalação deste navegador…</div>
+<p class="note">O navegador sempre pedirá sua confirmação. Esta página não instala programas silenciosamente nem baixa APK ou EXE.</p>
 </section>
-<section class="card">
+<section class="card" id="android">
 <h2>📱 Android — celular ou tablet</h2>
-<ol><li>Abra esta página no <strong>Google Chrome</strong>.</li><li>Toque em <strong>Instalar aplicativo</strong>, se aparecer.</li><li>Se não aparecer, abra o menu ⋮ do Chrome e escolha <strong>Instalar aplicativo</strong> ou <strong>Adicionar à tela inicial</strong>.</li><li>Confirme e procure o ícone da Central na tela inicial ou na lista de aplicativos.</li></ol>
+<ol><li>Abra esta página no Google Chrome.</li><li>Toque em <strong>Instalar aplicativo</strong> quando o botão estiver disponível.</li><li>Se o botão não abrir a confirmação, toque no menu ⋮ do Chrome e procure <strong>Instalar aplicativo</strong> ou <strong>Adicionar à tela inicial</strong>.</li><li>Confirme e procure o ícone da Central na tela inicial ou na lista de aplicativos.</li></ol>
 </section>
-<section class="card">
+<section class="card" id="desktop">
 <h2>💻 Windows — computador ou notebook</h2>
-<ol><li>Abra esta página no <strong>Google Chrome</strong> ou no <strong>Microsoft Edge</strong>.</li><li>Procure o ícone de instalação na barra de endereço ou abra o menu do navegador.</li><li>No Chrome, escolha <strong>Instalar Central de Estudos Bíblicos</strong> quando disponível. No Edge, procure <strong>Aplicativos → Instalar este site como aplicativo</strong>.</li><li>Depois de instalar, abra pelo menu Iniciar. O navegador pode oferecer a opção de criar um atalho na área de trabalho.</li></ol>
+<ol><li>Abra esta página no Google Chrome ou Microsoft Edge.</li><li>Use o botão de instalação acima, se disponível, ou procure o ícone de instalação na barra de endereço.</li><li>No Edge, também pode usar o menu <strong>Aplicativos → Instalar este site como aplicativo</strong>.</li><li>Confirme a instalação e abra pelo menu Iniciar.</li></ol>
+</section>
+<section class="card" id="apple">
+<h2>🍎 iPhone e iPad</h2>
+<ol><li>Abra o endereço oficial no Safari.</li><li>Toque em <strong>Compartilhar</strong>.</li><li>Escolha <strong>Adicionar à Tela de Início</strong> e confirme.</li></ol>
+<p class="note">No iPhone/iPad, o botão personalizado de instalação não é disponibilizado por todos os navegadores; use o procedimento acima.</p>
 </section>
 <section class="card">
-<h2>🍎 iPhone, iPad e outros tablets</h2>
-<ol><li>Abra a central no navegador do dispositivo.</li><li>No iPhone ou iPad, use o Safari, toque em <strong>Compartilhar</strong> e escolha <strong>Adicionar à Tela de Início</strong>, se disponível.</li><li>Em outros tablets, procure no menu do navegador a opção de instalar ou adicionar à tela inicial.</li></ol>
-</section>
-<section class="card">
-<h2>Se a opção de instalação não aparecer</h2>
-<p>Confira se está usando um navegador compatível e se a página foi aberta diretamente pelo endereço oficial. Em alguns navegadores, a opção pode aparecer com outro nome ou não estar disponível. Você ainda pode usar a central normalmente pelo navegador.</p>
-<p class="note">A instalação cria um atalho/aplicativo web. Seus materiais salvos na versão atual ficam no armazenamento do navegador daquele dispositivo e não são sincronizados automaticamente entre celular, tablet e computador. Use Exportar backup na biblioteca para transferir materiais.</p>
-<a class="btn secondary" href="./">Ir para a central</a>
+<h2>ℹ️ Sobre seus materiais</h2>
+<p>A Central é um aplicativo web (PWA), não um instalador nativo APK/EXE. As anotações salvas ficam no armazenamento do navegador daquele dispositivo e não são sincronizadas automaticamente. Na biblioteca da Central, use <strong>Exportar backup</strong> para guardar ou transferir seus materiais.</p>
 </section>
 </main>
 <footer class="footer">Igreja Batista Nova Esperança · Central de Estudos Bíblicos</footer>
+<script>
+let deferredPrompt=null;
+const installButton=document.getElementById('install');
+const statusBox=document.getElementById('status');
+function setStatus(message){statusBox.textContent=message}
+window.addEventListener('beforeinstallprompt',event=>{
+  event.preventDefault();
+  deferredPrompt=event;
+  installButton.disabled=false;
+  setStatus('Este navegador oferece instalação direta. Toque no botão acima e confirme quando solicitado.');
+});
+installButton.addEventListener('click',async()=>{
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    const choice=await deferredPrompt.userChoice;
+    deferredPrompt=null;
+    if(choice&&choice.outcome==='accepted')setStatus('Instalação aceita. Aguarde o navegador concluir e procure o ícone da Central.');
+    else setStatus('A instalação não foi confirmada. Você pode tentar novamente pelo menu do navegador.');
+    return;
+  }
+  const ua=navigator.userAgent;
+  if(/iPhone|iPad|iPod/i.test(ua)){
+    setStatus('No iPhone/iPad: abra esta página no Safari, toque em Compartilhar e depois em Adicionar à Tela de Início.');
+  }else if(/Android/i.test(ua)){
+    setStatus('No Android: abra o menu ⋮ do Chrome e escolha Instalar aplicativo ou Adicionar à tela inicial.');
+  }else{
+    setStatus('No computador: procure o ícone Instalar na barra de endereço ou abra o menu do Chrome/Edge e escolha Instalar aplicativo.');
+  }
+});
+window.addEventListener('appinstalled',()=>{deferredPrompt=null;setStatus('Central de Estudos Bíblicos instalada com sucesso neste dispositivo.')});
+if(!window.matchMedia('(display-mode: standalone)').matches && !navigator.standalone){
+  setStatus('Se o botão não abrir uma confirmação, siga as instruções do seu dispositivo logo abaixo.');
+}else{
+  setStatus('A Central já parece estar aberta como aplicativo instalado. Você pode abrir a Central pelo botão abaixo.');
+}
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+}
+</script>
 </body>
 </html>
